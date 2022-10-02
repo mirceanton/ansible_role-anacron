@@ -17,8 +17,13 @@
       ansible.builtin.assert:
         that: "'{{ anacron_package_name }}' in ansible_facts.packages"
 
-    - name: Check service state
-      ansible.builtin.assert:
+    - name: Check the existence of the anacrontab file
+      ansible.builtin.stat:
+        path: "{{ anacron_tab_file_path }}"
+      register: __anacrontab__
+    - ansible.builtin.assert:
         that:
-          - "'{{ anacron_service_name }}' in ansible_facts.services"
-          - "ansible_facts.services['{{ anacron_service_name }}'].state == 'running'"
+          - "__anacrontab__.stat.exists"
+          - "__anacrontab__.stat.isreg" # is a regular file
+          - "__anacrontab__.stat.path == '{{ anacron_tab_file_path }}'"
+          - "__anacrontab__.stat.mode == '0644'"
