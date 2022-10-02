@@ -1,7 +1,7 @@
 Ansible Role: Anacron
 =====================
 
-An Ansible role that installs the anacron service and configures jobs.
+An Ansible role that installs anacron and configures jobs.
 
 Requirements
 ------------
