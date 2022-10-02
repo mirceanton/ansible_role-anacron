@@ -1,10 +1,25 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   gather_facts: false
+
+  vars_files:
+    - ../../defaults/main.yml
+
+  pre_tasks:
+    - name: Gathering Package Facts
+      ansible.builtin.package_facts:
+    - name: Gathering Service Facts
+      ansible.builtin.service_facts:
+
   tasks:
-  - name: Example assertion
-    ansible.builtin.assert:
-      that: true
+    - name: Check if apt packages are installed
+      ansible.builtin.assert:
+        that: "'{{ anacron_package_name }}' in ansible_facts.packages"
+
+    - name: Check service state
+      ansible.builtin.assert:
+        that:
+          - "'{{ anacron_service_name }}' in ansible_facts.services"
+          - "'{{ anacron_service_state }}' == ansible_facts.services['{{ anacron_service_name }}'].state"
+    #       # - "'{{ anacron_service_enabled }}' == ansible_facts.services[]"
