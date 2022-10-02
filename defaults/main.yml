@@ -1,2 +1,9 @@
 ---
-# defaults file for anacron
+anacron_package_name: anacron
+anacron_package_state: present
+
+anacron_service_name: anacron
+anacron_service_state: started
+anacron_service_enabled: true
+
+anacron_tab_file_path: /etc/anacrontab
