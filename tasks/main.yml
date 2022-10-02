@@ -7,14 +7,6 @@
     cache_valid_time: 3600
   loop: ["{{ anacron_package_name }}"]
 
-- name: Enable and Start the Service
-  ansible.builtin.service:
-    name: "{{ item }}"
-    state: "{{ anacron_service_state }}"
-    enabled: "{{ anacron_service_enabled }}"
-  loop: ["{{ anacron_service_name }}"]
-  register: __service__
-
 - name: Configure Jobs
   ansible.builtin.lineinfile:
     path: "{{ anacron_tab_file_path }}"

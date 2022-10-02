@@ -5,14 +5,5 @@ anacron_package_name: anacron
 # The state of the anacron package
 anacron_package_state: present
 
-# The name of the anacron service
-anacron_service_name: anacron
-
-# The state of the anacron service
-anacron_service_state: started
-
-# Whether or not to enable the anacron service to start at boot
-anacron_service_enabled: true
-
 # The path to the anacrontab file
 anacron_tab_file_path: /etc/anacrontab
