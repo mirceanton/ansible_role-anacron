@@ -1,0 +1,24 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+
+  vars_files:
+    - ../../defaults/main.yml
+
+  pre_tasks:
+    - name: Gathering Package Facts
+      ansible.builtin.package_facts:
+    - name: Gathering Service Facts
+      ansible.builtin.service_facts:
+
+  tasks:
+    - name: Check if apt packages are installed
+      ansible.builtin.assert:
+        that: "'{{ anacron_package_name }}' in ansible_facts.packages"
+
+    - name: Check service state
+      ansible.builtin.assert:
+        that:
+          - "'{{ anacron_service_name }}' in ansible_facts.services"
+          - "ansible_facts.services['{{ anacron_service_name }}'].state == 'running'"
