@@ -17,12 +17,8 @@
       ansible.builtin.assert:
         that: "'{{ anacron_package_name }}' in ansible_facts.packages"
 
-    - debug:
-        var: ansible_facts.services['{{ anacron_service_name }}']
-
     - name: Check service state
       ansible.builtin.assert:
         that:
           - "'{{ anacron_service_name }}' in ansible_facts.services"
-          - "'{{ anacron_service_state }}' == ansible_facts.services['{{ anacron_service_name }}'].state"
-    #       # - "'{{ anacron_service_enabled }}' == ansible_facts.services[]"
+          - "ansible_facts.services['{{ anacron_service_name }}'].state == 'running'"
