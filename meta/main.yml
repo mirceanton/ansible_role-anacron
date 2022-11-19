@@ -5,10 +5,6 @@ galaxy_info:
   description: An Ansible role that configures the Anacron service and adds the specified jobs.
   # company: N/A
 
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
-
   license: license (MIT)
   min_ansible_version: "2.1"
   standalone: true

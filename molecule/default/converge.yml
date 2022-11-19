@@ -5,5 +5,5 @@
 
   tasks:
     - name: "Include mirceanton.anacron"
-      include_role:
+      ansible.builtin.include_role:
         name: "mirceanton.anacron"

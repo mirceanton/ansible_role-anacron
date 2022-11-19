@@ -17,11 +17,13 @@
       ansible.builtin.assert:
         that: "'{{ anacron_package_name }}' in ansible_facts.packages"
 
-    - name: Check the existence of the anacrontab file
+    - name: Get stats for the anacrontab file
       ansible.builtin.stat:
         path: "{{ anacron_tab_file_path }}"
       register: __anacrontab__
-    - ansible.builtin.assert:
+
+    - name: Validate stats
+      ansible.builtin.assert:
         that:
           - "__anacrontab__.stat.exists"
           - "__anacrontab__.stat.isreg" # is a regular file
